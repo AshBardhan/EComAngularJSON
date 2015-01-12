@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "name" : "Ashish Bardhan",
+      "email" : "ashbardhan@gmail.com",
+      "password" : "abcd"
+    },
+    {
+      "name" : "Rohit Taneja",
+      "email" : "rohit.taneja@healthkart.com",
+      "password" : "abcd"
+    },
+    {
+      "name" : "Arun Sasidharan",
+      "email" : "arun.sasidharan@healthkart.com",
+      "password" : "xoxo"
+    },
+    {
+      "name" : "Aman Gupta",
+      "email" : "amangupta@gmail.com",
+      "password" : "abcd"
+    }
+  ]
+}
