@@ -1,5 +1,19 @@
-extends layout
+extends layouts/default
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(ng-app='', ng-controller='personController')
+    | First Name:
+    input(type='text', ng-model='firstName')
+    br
+    | Last Name:
+    input(type='text', ng-model='lastName')
+    br
+    br
+    | Full Name: {{firstName + &quot; &quot; + lastName}}
+
+block js
+  script.
+    function personController($scope) {
+      $scope.firstName = "John";
+      $scope.lastName = "Doe";
+    }
