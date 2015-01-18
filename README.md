@@ -1,7 +1,5 @@
-# EComAngularJSON
-
-# EComAngularJSON
-=================
+EComAngularJSON
+===============
 > A single-page E-commerce web application (from Cart Item Selection to User Authetication while Confirnation) using AngularJS and JSON in NodeJS framework.
 
 Installation
