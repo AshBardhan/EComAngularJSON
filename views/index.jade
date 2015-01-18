@@ -23,6 +23,26 @@ block content
           td Rs. {{item.price}}
           td
             .button.remove(ng-click="removeFromCart(item.id)", ng-show="item.inCart") Remove
+        tr.confirm-box
+          td(colspan='2') Total amount : Rs. {{total}}
+          td
+            .button.checkout(ng-click='checkout()') Checkout
+    .confirm-section(ng-show='showConfirm')
+      h2(ng-hide='purchased') Confirm Checkout
+      h2(ng-show='purchased')
+        | Congratulations! {{name}}
+        br
+        | You've purchased the {{cartItems.length}} item(s) for Rs. {{total}}
+      .alert(ng-show='showInvalid && !purchased') Invalid LoginID or Password
+      fieldset(ng-hide='purchased')
+        span LoginID
+        input(ng-model='email', type='text')
+      fieldset(ng-hide='purchased')
+        span Password
+        input(ng-model='password', type='password')
+      .button(ng-hide='purchased', ng-click='submit()', ng-class="{'disabled': email.length == 0 || password.length == 0}", ng-disabled='email.length == 0 || password.length == 0') Submit
+    .confirm-background(ng-show='showConfirm', ng-click='close()')
+
 block js
   script.
     var app = angular.module('myApp', []);
@@ -30,6 +50,13 @@ block js
       $scope.openItem = true;
       $scope.cartItems = [];
       $scope.noCart = true;
+      $scope.showConfirm = false;
+      $scope.showInvalid = false;
+      $scope.purchased = false;
+      $scope.total = 0;
+      $scope.name = '';
+      $scope.email = '';
+      $scope.password = '';
       $scope.toggle = function(){
         $scope.openItem = !$scope.openItem;
       }
@@ -39,11 +66,30 @@ block js
             return i;
         }
       }
+      $scope.calculateTotal = function() {
+        $scope.total = 0;
+        $.each($scope.cartItems, function(i, item){
+          $scope.total += item.price;
+        });
+      }
+      $scope.close = function() {
+        $scope.showConfirm = !$scope.showConfirm;
+        if($scope.purchased){
+          $scope.cartItems = [];
+          $scope.openItem = true;
+          $scope.noCart = true;
+          $scope.purchased = false;
+          $.each($scope.items, function(i, item){
+            item.inCart = false;
+          });
+        }
+      }
       $scope.addToCart = function(itemId) {
         var index = $scope.findIndex(itemId, 'items');
         $scope.items[index].inCart = true;
         $scope.cartItems.push($scope.items[index]);
         $scope.noCart = false;
+        $scope.calculateTotal();
       }
       $scope.removeFromCart = function(itemId) {
         var index = $scope.findIndex(itemId, 'items');
@@ -54,6 +100,37 @@ block js
           $scope.noCart = true;
           $scope.openItem = true;
         }
+        $scope.calculateTotal();
+      }
+      $scope.checkout = function() {
+        $scope.showConfirm = true;
+      }
+      $scope.showMatchResult = function() {
+        $scope.showInvalid = false;
+        $scope.purchased = true;
+      }
+      $scope.showNoMatchResult = function() {
+        $scope.showInvalid = true;
+      }
+      $scope.submit = function() {
+        $http.get('../data/users.json').
+          success(function(data, status, headers, config) {
+            var found = -1;
+            $.each(data.users, function(i ,user) {
+              if(user.email === $scope.email && user.password === $scope.password ){
+                found = i;
+                $scope.name = user.name;
+              }
+            });
+            if(found != -1) {
+              $scope.showMatchResult();
+            } else {
+              $scope.showNoMatchResult();
+            }
+          }).
+          error(function(data, status, headers, config) {
+            // log error
+          });
       }
       $http.get('../data/items.json').
         success(function(data, status, headers, config) {

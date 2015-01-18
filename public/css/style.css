@@ -3,9 +3,6 @@ body {
   width: 960px;
   margin: 0px auto;
 }
-a {
-  color: #00B7FF;
-}
 .item-section,
 .cart-section {
   margin: 20px 0;
@@ -58,14 +55,18 @@ table tr td:first-child {
 table tr td:last-child {
   width: 20%;
 }
-table tr:nth-child(odd) {
+table tr:nth-child(even) {
   background: #eaeaea;
 }
-table tr:nth-child(even) {
+table tr:nth-child(odd) {
   background: #fff;
 }
 table tr:last-child td {
   border-bottom: 0;
+}
+table tr.confirm-box {
+  font-weight: bold;
+  background: #fff !important;
 }
 .button {
   background: #35a05f;
@@ -73,9 +74,64 @@ table tr:last-child td {
   text-align: center;
   cursor: pointer;
   padding: 5px 0;
+  font-size: 14px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
 }
 .button.remove {
   background: #ababab;
+}
+.button.checkout {
+  background: #07c5ff;
+}
+.button.disabled {
+  cursor: not-allowed;
+}
+.confirm-section {
+  position: fixed;
+  font-size: 12px;
+  top: 10%;
+  width: 400px;
+  left: 50%;
+  z-index: 2;
+  margin-left: -200px;
+  border-radius: 5px;
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #fff;
+  box-shadow: 0 0 10px 5px #dedede;
+}
+.confirm-section .alert {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.confirm-section h2 {
+  text-align: center;
+  margin: 5px 0 10px 0;
+}
+.confirm-section fieldset {
+  border: 0;
+  padding: 0;
+  margin-bottom: 10px;
+}
+.confirm-section fieldset span {
+  float: left;
+  display: inline-block;
+  margin: 5px 0;
+}
+.confirm-section fieldset input {
+  width: 330px;
+  float: right;
+}
+.confirm-background {
+  position: fixed;
+  background: white;
+  opacity: 0.75;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  right: 0;
 }

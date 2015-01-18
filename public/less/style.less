@@ -4,10 +4,6 @@ body {
   margin: 0px auto;
 }
 
-a {
-  color: #00B7FF;
-}
-
 .item-section, .cart-section {
   margin: 20px 0;
 }
@@ -61,16 +57,20 @@ table {
         width: 20%;
       }
     }
-    &:nth-child(odd) {
+    &:nth-child(even) {
       background: #eaeaea;
     }
-    &:nth-child(even) {
+    &:nth-child(odd) {
       background: #fff;
     }
     &:last-child {
       td {
         border-bottom: 0;
       }
+    }
+    &.confirm-box {
+      font-weight: bold;
+      background: #fff !important;
     }
   }
 }
@@ -81,9 +81,66 @@ table {
   text-align: center;
   cursor: pointer;
   padding: 5px 0;
+  font-size: 14px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   &.remove {
     background: #ababab;
   }
+  &.checkout {
+    background: #07c5ff;
+  }
+  &.disabled {
+    cursor: not-allowed;
+  }
+}
+
+.confirm-section {
+  position: fixed;
+  font-size: 12px;
+  top: 10%;
+  width: 400px;
+  left: 50%;
+  z-index: 2;
+  margin-left: -200px;
+  border-radius: 5px;
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #fff;
+  box-shadow: 0 0 10px 5px #dedede;
+  .alert {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  h2 {
+    text-align: center;
+    margin: 5px 0 10px 0;
+  }
+  fieldset {
+    border: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    span {
+      float: left;
+      display: inline-block;
+      margin: 5px 0;
+    }
+    input {
+      width: 330px;
+      float: right;
+    }
+  }
+}
+
+.confirm-background {
+  position: fixed;
+  background: white;
+  opacity: 0.75;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  right: 0;
 }
