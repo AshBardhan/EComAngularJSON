@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   width: 960px;
   margin: 0px auto;
@@ -7,21 +6,76 @@ body {
 a {
   color: #00B7FF;
 }
+.item-section,
+.cart-section {
+  margin: 20px 0;
+}
 .title-box {
   width: 100%;
+  background: #dedede;
+  float: left;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 .title-box .title-name {
   text-align: left;
   float: left;
+  padding: 10px;
+  box-sizing: border-box;
   width: 80%;
 }
 .title-box .section-toggle {
   float: left;
   width: 20%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  background: #ababab;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.title-box .section-toggle.disabled {
+  cursor: not-allowed;
 }
 table {
-  width: 100%;
-  margin-bottom: 10px;
+  width: 80%;
+  margin: 10px auto;
   border-collapse: collapse;
   border-spacing: 0;
+}
+table tr td {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 5px;
+}
+table tr td:first-child {
+  width: 50%;
+}
+table tr td:last-child {
+  width: 20%;
+}
+table tr:nth-child(odd) {
+  background: #eaeaea;
+}
+table tr:nth-child(even) {
+  background: #fff;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+.button {
+  background: #35a05f;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px 0;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.button.remove {
+  background: #ababab;
 }

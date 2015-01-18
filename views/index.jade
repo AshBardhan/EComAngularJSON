@@ -5,24 +5,24 @@ block content
     .item-section
       .title-box
         .title-name Available Items
-        .section-toggle(ng-click='noCart || toggle()', ng-disbaled='noCart')  Go To Cart
+        .section-toggle.items(ng-click='noCart || toggle()', ng-disbaled='noCart', ng-class="{'disabled': noCart}")  Go To Cart
       table(ng-show='openItem')
         tr(ng-repeat="item in items | orderBy : 'price'")
           td {{item.name}}
-          td {{item.price}}
+          td Rs. {{item.price}}
           td
-            .button(ng-click="addToCart(item.id)", ng-hide="item.inCart") Add to Cart
-            .button(ng-click="removeFromCart(item.id)", ng-show="item.inCart") Remove
+            .button.add(ng-click="addToCart(item.id)", ng-hide="item.inCart") Add to Cart
+            .button.remove(ng-click="removeFromCart(item.id)", ng-show="item.inCart") Remove
     .cart-section
       .title-box
         .title-name Cart Items
-        .section-toggle(ng-click='noCart || toggle()', ng-disbaled='noCart') Go To List
+        .section-toggle.cart(ng-click='noCart || toggle()', ng-disbaled='noCart', ng-class="{'disabled': noCart}") Go To List
       table(ng-hide='openItem')
         tr(ng-repeat="item in cartItems | orderBy : 'price'")
           td {{item.name}}
           td Rs. {{item.price}}
           td
-            .button(ng-click="removeFromCart(item.id)", ng-show="item.inCart") Remove
+            .button.remove(ng-click="removeFromCart(item.id)", ng-show="item.inCart") Remove
 block js
   script.
     var app = angular.module('myApp', []);
