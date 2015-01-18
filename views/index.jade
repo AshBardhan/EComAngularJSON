@@ -9,10 +9,9 @@ block content
       table(ng-show='openItem')
         tr(ng-repeat="item in items | orderBy : 'price'")
           td {{item.name}}
-          td Rs. {{item.price}}
+          td Rs. {{item.price}} per Qty
           td
-            .button.add(ng-click="addToCart(item.id)", ng-hide="item.inCart") Add to Cart
-            .button.remove(ng-click="removeFromCart(item.id)", ng-show="item.inCart") Remove
+            .button.add(ng-click="addToCart(item.id)") {{item.inCart ? 'Add More':'Add to Cart'}}
     .cart-section
       .title-box
         .title-name Cart Items
@@ -20,9 +19,14 @@ block content
       table(ng-hide='openItem')
         tr(ng-repeat="item in cartItems | orderBy : 'price'")
           td {{item.name}}
-          td Rs. {{item.price}}
           td
-            .button.remove(ng-click="removeFromCart(item.id)", ng-show="item.inCart") Remove
+            | Rs. {{item.price}}&nbsp;&nbsp;&nbsp;&nbsp;
+            strong X&nbsp;&nbsp;&nbsp;&nbsp;
+            span.btn.dec(ng-click="decItemQty(item.id)") -
+            span.btn-qty {{item.qty}}
+            span.btn.inc(ng-click="incItemQty(item.id)") +
+          td
+            .button.remove(ng-click="removeFromCart(item.id)") Remove
         tr.confirm-box
           td(colspan='2') Total amount : Rs. {{total}}
           td
@@ -47,11 +51,11 @@ block js
   script.
     var app = angular.module('myApp', []);
     app.controller('itemController', function($scope,$http){
+      $scope.showConfirm = false;
+      $scope.showInvalid = false;
       $scope.openItem = true;
       $scope.cartItems = [];
       $scope.noCart = true;
-      $scope.showConfirm = false;
-      $scope.showInvalid = false;
       $scope.purchased = false;
       $scope.total = 0;
       $scope.name = '';
@@ -65,35 +69,55 @@ block js
           if($scope[itemList][i].id == id)
             return i;
         }
+        return -1;
       }
       $scope.calculateTotal = function() {
         $scope.total = 0;
         $.each($scope.cartItems, function(i, item){
-          $scope.total += item.price;
+          $scope.total += (item.price * item.qty);
         });
       }
       $scope.close = function() {
         $scope.showConfirm = !$scope.showConfirm;
         if($scope.purchased){
-          $scope.cartItems = [];
+          $scope.cartItems.length = 0;
           $scope.openItem = true;
           $scope.noCart = true;
           $scope.purchased = false;
           $.each($scope.items, function(i, item){
             item.inCart = false;
+            item.qty = 1;
           });
         }
       }
+      $scope.incItemQty = function(itemId) {
+        var index = $scope.findIndex(itemId, 'cartItems');
+        $scope.cartItems[index].qty += 1;
+        $scope.calculateTotal();
+      }
+      $scope.decItemQty = function(itemId) {
+        var index = $scope.findIndex(itemId, 'cartItems');
+        if($scope.cartItems[index].qty > 1){
+          $scope.cartItems[index].qty -= 1;
+        }
+        $scope.calculateTotal();
+      }
       $scope.addToCart = function(itemId) {
-        var index = $scope.findIndex(itemId, 'items');
-        $scope.items[index].inCart = true;
-        $scope.cartItems.push($scope.items[index]);
-        $scope.noCart = false;
+        var index = $scope.findIndex(itemId, 'cartItems');
+        if(index == -1) {
+          index = $scope.findIndex(itemId, 'items');
+          $scope.items[index].inCart = true;
+          $scope.cartItems.push($scope.items[index]);
+          $scope.noCart = false;
+        } else {
+          $scope.cartItems[index].qty += 1;
+        }
         $scope.calculateTotal();
       }
       $scope.removeFromCart = function(itemId) {
         var index = $scope.findIndex(itemId, 'items');
         $scope.items[index].inCart = false;
+        $scope.items[index].qty = 1;
         index = $scope.findIndex(itemId, 'cartItems');
         $scope.cartItems.splice(index,1);
         if($scope.cartItems.length == 0) {
