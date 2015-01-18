@@ -1,19 +1,53 @@
 extends layouts/default
 
 block content
-  div(ng-app='', ng-controller='itemController')
-    ul
-      li(ng-repeat='item in items') {{item.name}} - {{item.price}}
-
+  div(ng-app='myApp', ng-controller='itemController')
+    .item-section
+      table(ng-show='openItem')
+        tr(ng-repeat="item in items | orderBy : 'price'")
+          td {{item.name}}
+          td {{item.price}}
+          td
+            .button(ng-click="addToCart(item.id)", ng-hide="item.inCart") Add to Cart
+            .button(ng-click="removeFromCart(item.id)", ng-show="item.inCart") Remove
+    .cart-section
+      table(ng-show='openItem')
+        tr(ng-repeat="item in cartItems | orderBy : 'price'")
+          td {{item.name}}
+          td Rs. {{item.price}}
+          td
+            .button(ng-click="removeFromCart(item.id)", ng-show="item.inCart") Remove
 block js
   script.
-    function itemController($scope,$http) {
-    $http.get('../data/items.json').
-      success(function(data, status, headers, config) {
-        $scope.items = data.items;
-        console.log(data);
-      }).
-      error(function(data, status, headers, config) {
-        // log error
-      });
-    };
+    var app = angular.module('myApp', []);
+    app.controller('itemController', function($scope,$http){
+      $scope.openItem = true;
+      $scope.cartItems = [];
+      $scope.toggle = function(){
+        $scope.openItem = !$scope.openItem;
+      }
+      $scope.findIndex = function(id, itemList) {
+        for(var i in $scope[itemList]){
+          if($scope[itemList][i].id == id)
+            return i;
+        }
+      }
+      $scope.addToCart = function(itemId) {
+        var index = $scope.findIndex(itemId, 'items');
+        $scope.items[index].inCart = true;
+        $scope.cartItems.push($scope.items[index]);
+      }
+      $scope.removeFromCart = function(itemId) {
+        var index = $scope.findIndex(itemId, 'items');
+        $scope.items[index].inCart = false;
+        index = $scope.findIndex(itemId, 'cartItems');
+        $scope.cartItems.splice(index,1);
+      }
+      $http.get('../data/items.json').
+        success(function(data, status, headers, config) {
+          $scope.items = data.items;
+        }).
+        error(function(data, status, headers, config) {
+          // log error
+        });
+    });

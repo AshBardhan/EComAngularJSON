@@ -1,44 +1,60 @@
 {
   "items": [
     {
+      "id" : "1",
       "name" : "Lenevo Laptop",
       "category" : "Electronics",
-      "price" : 54000
+      "price" : 54000,
+      "inCart" : false
     },
     {
+      "id" : "2",
       "name" : "iPhone 6",
       "category" : "Electronics",
-      "price" : 65000
+      "price" : 65000,
+      "inCart" : false
     },
     {
+      "id" : "3",
       "name" : "Game of Thrones",
       "category" : "Books",
-      "price" : 2399
+      "price" : 2399,
+      "inCart" : false
     },
     {
+      "id" : "4",
       "name" : "Harry Potter",
       "category" : "Books",
-      "price" : 695
+      "price" : 695,
+      "inCart" : false
     },
     {
+      "id" : "5",
       "name" : "Black Swan",
       "category" : "Books",
-      "price" : 499
+      "price" : 499,
+      "inCart" : false
     },
     {
+      "id" : "6",
       "name" : "T-shirt",
       "category" : "Clothes",
-      "price" : 399
+      "price" : 399,
+      "inCart" : false
     },
     {
+      "id" : "7",
       "name" : "Shoes",
       "category" : "Clothes",
-      "price" : 1295
+      "price" : 1295,
+      "inCart" : false
     },
     {
+      "id" : "8",
       "name" : "Formal Shirt",
       "category" : "Clothes",
-      "price" : 799
+      "price" : 799,
+      "inCart" : false
     }
   ]
 }
