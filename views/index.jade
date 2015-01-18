@@ -3,6 +3,9 @@ extends layouts/default
 block content
   div(ng-app='myApp', ng-controller='itemController')
     .item-section
+      .title-box
+        .title-name Available Items
+        .section-toggle(ng-click='noCart || toggle()', ng-disbaled='noCart')  Go To Cart
       table(ng-show='openItem')
         tr(ng-repeat="item in items | orderBy : 'price'")
           td {{item.name}}
@@ -11,7 +14,10 @@ block content
             .button(ng-click="addToCart(item.id)", ng-hide="item.inCart") Add to Cart
             .button(ng-click="removeFromCart(item.id)", ng-show="item.inCart") Remove
     .cart-section
-      table(ng-show='openItem')
+      .title-box
+        .title-name Cart Items
+        .section-toggle(ng-click='noCart || toggle()', ng-disbaled='noCart') Go To List
+      table(ng-hide='openItem')
         tr(ng-repeat="item in cartItems | orderBy : 'price'")
           td {{item.name}}
           td Rs. {{item.price}}
@@ -23,6 +29,7 @@ block js
     app.controller('itemController', function($scope,$http){
       $scope.openItem = true;
       $scope.cartItems = [];
+      $scope.noCart = true;
       $scope.toggle = function(){
         $scope.openItem = !$scope.openItem;
       }
@@ -36,12 +43,17 @@ block js
         var index = $scope.findIndex(itemId, 'items');
         $scope.items[index].inCart = true;
         $scope.cartItems.push($scope.items[index]);
+        $scope.noCart = false;
       }
       $scope.removeFromCart = function(itemId) {
         var index = $scope.findIndex(itemId, 'items');
         $scope.items[index].inCart = false;
         index = $scope.findIndex(itemId, 'cartItems');
         $scope.cartItems.splice(index,1);
+        if($scope.cartItems.length == 0) {
+          $scope.noCart = true;
+          $scope.openItem = true;
+        }
       }
       $http.get('../data/items.json').
         success(function(data, status, headers, config) {
