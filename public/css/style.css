@@ -1,3 +1,4 @@
+/* Common CSS Rules */
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   width: 960px;
@@ -76,6 +77,7 @@ body {
   right: 0;
 }
 
+/* Page-specific CSS Rules for Item and Cart Item List */
 .item-section,
 .cart-section {
   margin: 20px 0;

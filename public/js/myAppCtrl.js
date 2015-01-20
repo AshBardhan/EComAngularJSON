@@ -1,3 +1,4 @@
+/* Creating Angular App Controller for Items and handling some behavioral events */
 var app = angular.module('myApp', []);
 app.controller('itemController', function ($scope, $http) {
   $scope.showConfirm = false;
