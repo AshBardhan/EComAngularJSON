@@ -1,10 +1,10 @@
 EComAngularJSON
 ===============
-> A single-page E-commerce web application (from Cart Item Selection to User Authetication while Confirnation) using AngularJS and JSON in NodeJS framework.
+> A single-page E-commerce web application (from Cart Item Selection to User Authentication while Confirmation) using AngularJS and JSON in NodeJS framework.
 
 Installation
 ===========================
-1. Clone the complete codebase into your prefered location.
+1. Clone the complete codebase into your preferred location.
 2. Download and Install latest versions of NodeJS.
 3. (Optional) Import this project into "IntelliJ IDEA" IDE as Node ExpressJS project. This will add some standard NodeJS packages inside "node_modules" folder.
 4. Use the following command on the location of your project
