@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		concat: {
 			js : {
-		  		src : ['public/js/utils/angular.js', 'public/js/myAppCtrl.js'],
+		  		src : ['public/js/myAppCtrl.js'],
 		  		dest : 'public/js/combo.js'
 			},
 			css : {
