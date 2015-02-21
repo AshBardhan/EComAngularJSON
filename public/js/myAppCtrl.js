@@ -1,6 +1,6 @@
 /* Creating Angular App Controller for Items and handling some behavioral events */
 var app = angular.module('myApp', []);
-app.controller('itemController', [ '$scope', '$http', function ($scope, $http) {
+app.controller('itemController', ['$scope', '$http', function ($scope, $http) {
   $scope.showConfirm = false;
   $scope.showInvalid = false;
   $scope.openItem = true;
