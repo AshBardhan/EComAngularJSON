@@ -1,6 +1,6 @@
 exports.urls = {
-  WEB: {
-    HOME_PAGE: '/'
-  }
+	WEB: {
+		HOME_PAGE: '/'
+	}
 };
 

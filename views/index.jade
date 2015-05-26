@@ -1,51 +1,51 @@
 extends layouts/default
 
 block content
-  div(ng-app='myApp', ng-controller='itemController')
-    .item-section
-      .title-box
-        .title-name Available Items
-        .section-toggle.items(ng-click='noCart || toggle()', ng-disbaled='noCart', ng-class="{'disabled': noCart}")  Go To Cart
-      table(ng-show='openItem')
-        tr(ng-repeat="item in items | orderBy : 'price'")
-          td {{item.name}}
-          td Rs. {{item.price}} per Qty
-          td
-            .button.add(ng-click="addToCart(item.id)") {{item.inCart ? 'Add More':'Add to Cart'}}
-    .cart-section
-      .title-box
-        .title-name Cart Items
-        .section-toggle.cart(ng-click='noCart || toggle()', ng-disbaled='noCart', ng-class="{'disabled': noCart}") Go To List
-      table(ng-hide='openItem')
-        tr(ng-repeat="item in cartItems | orderBy : 'price'")
-          td {{item.name}}
-          td
-            | Rs. {{item.price}}&nbsp;&nbsp;&nbsp;&nbsp;
-            strong X&nbsp;&nbsp;&nbsp;&nbsp;
-            span.btn.dec(ng-click="decItemQty(item.id)") -
-            span.btn-qty {{item.qty}}
-            span.btn.inc(ng-click="incItemQty(item.id)") +
-          td
-            .button.remove(ng-click="removeFromCart(item.id)") Remove
-        tr.confirm-box
-          td(colspan='2') Total amount : Rs. {{total}}
-          td
-            .button.checkout(ng-click='checkout()') Checkout
-    .confirm-section(ng-show='showConfirm')
-      h2(ng-hide='purchased') Confirm Checkout
-      h2(ng-show='purchased')
-        | Congratulations! {{name}}
-        br
-        | You've purchased the {{cartItems.length}} item(s) for Rs. {{total}}
-      .alert(ng-show='showInvalid && !purchased') Invalid LoginID or Password
-      fieldset(ng-hide='purchased')
-        span LoginID
-        input(ng-model='email', type='text')
-      fieldset(ng-hide='purchased')
-        span Password
-        input(ng-model='password', type='password')
-      .button(ng-hide='purchased', ng-click='submit()', ng-class="{'disabled': email.length == 0 || password.length == 0}", ng-disabled='email.length == 0 || password.length == 0') Submit
-    .confirm-background(ng-show='showConfirm', ng-click='close()')
+	div(ng-app='myApp', ng-controller='itemController')
+		.item-section
+			.title-box
+				.title-name Available Items
+				.section-toggle.items(ng-click='noCart || toggle()', ng-disbaled='noCart', ng-class="{'disabled': noCart}")  Go To Cart
+			table(ng-show='openItem')
+				tr(ng-repeat="item in items | orderBy : 'price'")
+					td {{item.name}}
+					td Rs. {{item.price}} per Qty
+					td
+						.button.add(ng-click="addToCart(item.id)") {{item.inCart ? 'Add More':'Add to Cart'}}
+		.cart-section
+			.title-box
+				.title-name Cart Items
+				.section-toggle.cart(ng-click='noCart || toggle()', ng-disbaled='noCart', ng-class="{'disabled': noCart}") Go To List
+			table(ng-hide='openItem')
+				tr(ng-repeat="item in cartItems | orderBy : 'price'")
+					td {{item.name}}
+					td
+						| Rs. {{item.price}}&nbsp;&nbsp;&nbsp;&nbsp;
+						strong X&nbsp;&nbsp;&nbsp;&nbsp;
+						span.btn.dec(ng-click="decItemQty(item.id)") -
+						span.btn-qty {{item.qty}}
+						span.btn.inc(ng-click="incItemQty(item.id)") +
+					td
+						.button.remove(ng-click="removeFromCart(item.id)") Remove
+				tr.confirm-box
+					td(colspan='2') Total amount : Rs. {{total}}
+					td
+						.button.checkout(ng-click='checkout()') Checkout
+		.confirm-section(ng-show='showConfirm')
+			h2(ng-hide='purchased') Confirm Checkout
+			h2(ng-show='purchased')
+				| Congratulations! {{name}}
+				br
+				| You've purchased the {{cartItems.length}} item(s) for Rs. {{total}}
+			.alert(ng-show='showInvalid && !purchased') Invalid LoginID or Password
+			fieldset(ng-hide='purchased')
+				span LoginID
+				input(ng-model='email', type='text')
+			fieldset(ng-hide='purchased')
+				span Password
+				input(ng-model='password', type='password')
+			.button(ng-hide='purchased', ng-click='submit()', ng-class="{'disabled': email.length == 0 || password.length == 0}", ng-disabled='email.length == 0 || password.length == 0') Submit
+		.confirm-background(ng-show='showConfirm', ng-click='close()')
 
 block js
-  script(src='/js/combo.min.js')
+	script(src='/js/combo.min.js')
