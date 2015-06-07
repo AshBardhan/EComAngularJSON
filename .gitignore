@@ -4,3 +4,7 @@
 node_modules/
 .DS_Store
 *.iml
+public/css/combo.css
+public/css/combo.min.css
+public/js/combo.js
+public/js/combo.min.js
