@@ -10,6 +10,7 @@ Installation
 4. Use the following command on the location of your project
   - "npm install" (Optional for IDEA developers)
   - "npm install -g less" (For setting up LESS CSS framework and running the 'lessc' command)
+  - "grunt" (For building some CSS and JS files, including the minified ones)
 5. For IDEA developers, proceed the following steps
   - Create/Edit the NodeJS configuration settings.
   - Fill up the location of your node.exe file in "Node Interpreter" section.
