@@ -1,6 +1,6 @@
 var app = angular.module('myApp', ['myAppCtrl', 'ui.router']);
 
-app.config(['$stateProvider', function ($stateProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 	$stateProvider
 		.state('home', {
 			url: '/',
@@ -20,4 +20,5 @@ app.config(['$stateProvider', function ($stateProvider) {
 			templateUrl: 'partial/view2',
 			controller: 'view2Controller'
 		});
+	$urlRouterProvider.otherwise('/');
 }]);
