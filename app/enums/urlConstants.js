@@ -1,6 +1,6 @@
 exports.urls = {
 	WEB: {
-		HOME_PAGE: '/'
+		HOME_PAGE: '/',
+		PARTIAL_PAGE : '/partial/:name'
 	}
 };
-

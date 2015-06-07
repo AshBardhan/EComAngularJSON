@@ -1,10 +1,13 @@
 doctype html
-html
+html(ng-app='myApp')
 	head
+		meta(charset='utf8')
+		base(href='/')
 		title= title
 		link(rel='stylesheet', href='/css/combo.min.css')
 	body
 		block content
-		//-script(src='../js/utils/jquery.min.js')
-		//-script(src='../js/utils/angular.min.js')
+		script(src='/js/utils/jquery.min.js')
+		script(src='/js/utils/angular.min.js')
+		script(src='/js/utils/angular-ui-router.min.js')
 		block js
