@@ -1,10 +1,17 @@
 # Created by .gitignore support plugin (hsz.mobi)
 
-.idea/
-node_modules/
+### OSX ###
 .DS_Store
+
+### PhPStorm / IntellJ IDEA ###
+.idea/
 *.iml
-public/css/combo.css
-public/css/combo.min.css
-public/js/combo.js
-public/js/combo.min.js
+
+### Build Related ###
+public/js/combo*.js
+public/css/combo*.css
+
+### Node/Grunt/npm Related ###
+node_modules/
+npm-debug.log
+.grunt
